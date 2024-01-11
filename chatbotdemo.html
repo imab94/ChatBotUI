@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot Using Js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Add this to your HTML file -->
+   <button id="chatbot-icon">Chat with us</button>
+
+    <div id="chatbot">
+        <div id="chatbot-header">
+            <img src="png-clipart.png" alt="Chatbot Icon" id="chatbot-img">
+            <button id="chatbot-close">&times;</button>
+        </div>
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Type here...">
+    </div> 
+          
+<script>
+    // Add this to your JavaScript file
+const chatbotIcon = document.getElementById('chatbot-icon');
+const chatbotDiv = document.getElementById('chatbot');
+
+const chatbox = document.getElementById('chatbox');
+const userInput = document.getElementById('userInput');
+    
+const chatbotClose = document.getElementById('chatbot-close');
+
+let chatbotDisplayed = false;
+
+chatbotIcon.addEventListener('click', () => {
+  if (!chatbotDisplayed) {
+    chatbotDiv.style.display = 'block';
+    chatbotDisplayed = true;
+
+  }
+});
+
+chatbotClose.addEventListener('click', () => {
+  chatbotDiv.style.display = 'none';
+  chatbotDisplayed = false;
+});
+
+// Function to add user message to the chatbox
+function addUserMessage() {
+    var userInput = document.getElementById('userInput').value;
+    var chatbox = document.getElementById('chatbox');
+    var userMessage = document.createElement('div');
+    userMessage.className = 'user-message';
+    userMessage.textContent = userInput;
+    chatbox.appendChild(userMessage);
+    document.getElementById('userInput').value = '';
+  }
+  
+  // Function to add bot message to the chatbox
+  function addBotMessage(botResponse) {
+    var chatbox = document.getElementById('chatbox');
+    var botMessage = document.createElement('div');
+    botMessage.className = 'bot-message';
+    botMessage.textContent = botResponse;
+    chatbox.appendChild(botMessage);
+  }
+  
+
+    // Delay chatbot prompt by 2 seconds
+    setTimeout(() => {
+      chatbox.innerHTML += '<div class="chatbot-message">Hello, how can I assist you?</div>';
+    },2000);
+    
+    // Handle user input
+    userInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        const message = userInput.value;
+        chatbox.innerHTML += `<div class="user-message">${message}</div>`;
+        // Call function to handle chatbot response
+        handleChatbotResponse(message);
+        userInput.value = '';
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+    });
+    
+    // Handle chatbot response
+    function handleChatbotResponse(message) {
+      // Add code to generate chatbot response based on user input
+      chatbox.innerHTML += `<div class="chatbot-message">Hey</div>`;
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+    
+
+</script>
+</body>
+</html>
